@@ -1,0 +1,60 @@
+<div class="wrapper">
+
+<h1>{{title}}</h1>
+<h2>Account Information</h2>
+
+<h3>{{success}}</h3>
+<form (ngSubmit)="onSubmit()" name="regForm" #regForm='ngForm'>
+<!-- First Name  -->
+<p>First Name  
+  <input type="text" id="dirtyForm" name="firstName" required minlength="3" [(ngModel)]="user.firstName" #firstName='ngModel'/>
+  <span *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+    <span *ngIf ="firstName.errors.required">First name is required.</span> 
+    <span *ngIf ="firstName.errors.minlength">Min length for First name is 3.</span> 
+  </span>
+</p>
+
+<p>Last Name
+  <input type="text" name="lastName" required minlength="3" 
+    [(ngModel)]="user.lastName"
+    #lastName='ngModel'/>
+    <span *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+        <span *ngIf ="lastName.errors.required">Last name is required.</span> 
+        <span *ngIf ="lastName.errors.minlength">Min length for last name is 3.</span> 
+    </span>
+</p>
+<!-- Email -->
+<p>Email   
+    <input type="text" name="email" 
+        required 
+        minlength="4" 
+        [(ngModel)]="user.email"
+        #email='ngModel'/>
+  <span *ngIf="lastName.invalid && (email.dirty || email.touched)">
+  <span *ngIf="!email.valid">Please Enter a valid Email</span>
+  </span>
+</p>
+<p>Password
+    <input type="text" name="password" required minlength="7" pattern="^([a-zA-Z0-9@*#]{8,15})$" [(ngModel)]="user.password"
+    #password='ngModel' />
+    <span *ngIf="password.invalid && (password.dirty || password.touched)">
+    <span *ngIf="password.errors.required">Please Enter a valid Password</span>
+    <span *ngIf="!password.minlength">Atleast 7 characters </span>
+  </span>
+</p>
+<p>Confirm Password
+    <input type="text" name="confirm" required minlength="7" pattern="^([a-zA-Z0-9@*#]{8,15})$" [(ngModel)]="user.confirm"
+    #confirm='ngModel' />
+    <span *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)">
+    <span *ngIf="user.confirm != user.password">Please Match Passwords</span>
+  </span>
+</p>
+<p>I am feeling lucky:
+    <input type="radio" name="lucky" value="yes" checked>Yes
+    <input type="radio" name="lucky" value="no">No
+</p>
+<input type="submit" ng-disabled="false" *ngIf="regForm.valid" value="Register">
+  
+</form>
+
+</div>
